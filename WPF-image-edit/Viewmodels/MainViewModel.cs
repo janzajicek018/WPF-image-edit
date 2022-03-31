@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using WPF_image_edit.Models;
 
 namespace WPF_image_edit.Viewmodels
 {
@@ -18,9 +19,9 @@ namespace WPF_image_edit.Viewmodels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        private ImageSource _imageSource;
-        public ImageSource Image { get { return _imageSource; } set { _imageSource = value; NotifyPropertyChanged(); } }
-
+        private BitmapImage _imageSource;
+        private Image _image = new Image();
+        public BitmapImage ImageSource { get { return _imageSource; } set { _imageSource = value; NotifyPropertyChanged(); } }
 
 
         public RelayCommand btnLoadImage { get; set; }
@@ -38,12 +39,12 @@ namespace WPF_image_edit.Viewmodels
                 if (dialog.ShowDialog() == true)
                 {
                     BitmapImage bitmapImage = new BitmapImage(new Uri(dialog.FileName));
-                    Image = bitmapImage;
+                    ImageSource = bitmapImage;
                 }
             });
             btnUnloadImage = new RelayCommand(() =>
             {
-                Image = null;
+                ImageSource = null;
             });
             btnApplyFilter = new RelayCommand(() =>
             {
@@ -55,7 +56,7 @@ namespace WPF_image_edit.Viewmodels
             });
             btnColor2Grayscale = new RelayCommand(() =>
             {
-
+                ImageSource = _image.FilterColor(ImageSource);
             });
             btnNegative = new RelayCommand(() =>
             {

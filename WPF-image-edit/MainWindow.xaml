@@ -44,6 +44,6 @@
                 <ComboBox Grid.Column="0" Grid.Row="3"/>
             </Grid>
         </StackPanel>
-        <Image x:Name="Img" Grid.Column="1" Source="{Binding Image}" />
+        <Image x:Name="Img" Grid.Column="1" Source="{Binding ImageSource}" />
     </Grid>
 </Window>
