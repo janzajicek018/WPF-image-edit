@@ -56,7 +56,7 @@ namespace WPF_image_edit.Viewmodels
             });
             btnColor2Grayscale = new RelayCommand(() =>
             {
-                ImageSource = _image.FilterColor(ImageSource);
+                ImageSource = _image.Color2Grayscale(ImageSource);
             });
             btnNegative = new RelayCommand(() =>
             {

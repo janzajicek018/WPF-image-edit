@@ -15,7 +15,7 @@ namespace WPF_image_edit.Models
         private int[,] pixels;
 
         WriteableBitmap wbm;
-        public BitmapImage FilterColor(BitmapImage src)
+        public BitmapImage Color2Grayscale(BitmapImage src)
         {
             pixels = Array2DBMIConverter.BitmapImageToArray2D(src);
             
