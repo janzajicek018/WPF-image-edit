@@ -25,12 +25,28 @@ namespace WPF_image_edit.Models
                 for(int y = 0; y < pixels.GetLength(1); ++y)
                 {
                     //pixels[x, y] = pixels[x, y] & color;
-                    int a = (int)(pixels[x, y] & 0xFF000000);
+                    int a = (pixels[x, y] >> 24) & 0xFF;
                     int r = (pixels[x, y] >> 16) & 0xFF;
                     int g = (pixels[x, y] >> 8) & 0xFF;
                     int b = pixels[x, y] & 0xFF;
-                    int pr = (r + g + b) / 3;
-                    pixels[x, y] = (a << 24) + (pr << 16) + (pr << 8) + pr;
+                    int average = (r + g + b) / 3; //0.333 * r + 0.5 * g + 0.27 * b
+                    pixels[x, y] = (a << 24) + (average << 16) + (average << 8) + average;
+                }
+            }
+            wbm = Array2DBMIConverter.Array2DToWriteableBitmap(pixels, src);
+            src = Array2DBMIConverter.ConvertWriteableBitmapToBitmapImage(wbm);
+            return src;
+        }
+        public BitmapImage ReduceColor(BitmapImage src)
+        {
+            pixels = Array2DBMIConverter.BitmapImageToArray2D(src);
+
+            for (int x = 0; x < pixels.GetLength(0); ++x)
+            {
+                for (int y = 0; y < pixels.GetLength(1); ++y)
+                {
+                    int color = pixels[x, y];
+                    pixels[x, y] = (int)(color & 0xfffefefe); //0b111111111111111011111110111111110 //try ff808080 or something idk
                 }
             }
             wbm = Array2DBMIConverter.Array2DToWriteableBitmap(pixels, src);

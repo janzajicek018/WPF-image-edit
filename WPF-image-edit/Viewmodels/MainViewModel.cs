@@ -30,6 +30,7 @@ namespace WPF_image_edit.Viewmodels
         public RelayCommand cbxParallel { get; set; }
         public RelayCommand btnColor2Grayscale { get; set; }
         public RelayCommand btnNegative { get; set; }
+        public RelayCommand btnReduceColor { get; set; }
 
         public MainViewModel()
         {
@@ -61,6 +62,9 @@ namespace WPF_image_edit.Viewmodels
             btnNegative = new RelayCommand(() =>
             {
 
+            });
+            btnReduceColor = new RelayCommand(() => {
+                ImageSource = _image.ReduceColor(ImageSource);
             });
         }
     }
