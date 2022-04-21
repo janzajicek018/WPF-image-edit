@@ -47,21 +47,13 @@ namespace WPF_image_edit.Viewmodels
             {
                 ImageSource = null;
             });
-            btnApplyFilter = new RelayCommand(() =>
-            {
-
-            });
-            cbxParallel = new RelayCommand(() =>
-            {
-
-            });
             btnColor2Grayscale = new RelayCommand(() =>
             {
                 ImageSource = _image.Color2Grayscale(ImageSource);
             });
             btnNegative = new RelayCommand(() =>
             {
-
+                ImageSource = _image.Negative(ImageSource);
             });
             btnReduceColor = new RelayCommand(() => {
                 ImageSource = _image.ReduceColor(ImageSource);
